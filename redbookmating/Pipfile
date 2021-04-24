@@ -8,6 +8,7 @@ django = "*"
 django-phone-field = "*"
 psycopg2-binary = "*"
 django-allauth = "*"
+django-location-field = "*"
 
 [dev-packages]
 

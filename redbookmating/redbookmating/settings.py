@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
 
-    'accounts'
+    'accounts',
+    'animals',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'crum.CurrentRequestUserMiddleware',
 ]
+
 
 ROOT_URLCONF = 'redbookmating.urls'
 

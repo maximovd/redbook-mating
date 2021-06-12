@@ -1,8 +1,7 @@
 from drf_yasg.utils import swagger_auto_schema
-from django.shortcuts import render
 from rest_framework import generics, status
-from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.response import Response
+from rest_framework.parsers import FormParser, MultiPartParser
 
 from .models import Animal, AnimalType, AnimalProperty
 from .serializers import (
@@ -17,6 +16,7 @@ from .serializers import (
 class AnimalTypeViewSet(generics.ListAPIView):
     queryset = AnimalType.objects.all()
     serializer_class = AnimalTypeSerializer
+
 
 class AnimalPropertyViewSet(generics.ListAPIView):
     queryset = AnimalProperty.objects.all()
@@ -87,6 +87,31 @@ class AnimalRetrieveUpdateDestroyView(
     )
     def put(self, request, pk):
         old_animal = generics.get_object_or_404(self.get_queryset(), )
-        pass
-        # TODO Finish it
+        serializer_in = AnimalCreateUpdateDestroySerializer(instance=old_animal, data=request.data)
+        serializer_in.is_valid(raise_exception=True)
+        new_animal = serializer_in.save()
+        serializer_out = AnimalListRetrieveSerializer(new_animal)
+        return Response(serializer_out.data)
+
+    @swagger_auto_schema(response={200: AnimalListRetrieveSerializer()})
+    def delete(self, request, pk, *args, **kwargs):
+        instance = generics.get_object_or_404(self.get_queryset(), pk=pk)
+        instance.is_deleted = True
+        instance.save()
+        return Response(AnimalListRetrieveSerializer(instance).data, status=status.HTTP_200_OK)
+
+
+class AnimalImageLoadView(generics.GenericAPIView):
+    serializer_class = AnimalImageLoadSerializer
+    queryset = Animal.objects.get_queryset()
+    permission_classes = None  # TODO Create permission classes
+    parser_classes = (FormParser, MultiPartParser)
+
+    def put(self, request, pk=None):
+        saved = generics.get_object_or_404(self.get_queryset(), pk=pk)
+        data = request.data
+        serializer = self.serializer_class(instance=saved, data=data, partial=True)
+        saved_data = serializer.save()
+        return Response(AnimalListRetrieveSerializer(saved_data).data)
+
 

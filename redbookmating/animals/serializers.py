@@ -1,24 +1,24 @@
 from django.db import transaction
 from rest_framework import serializers
 
-from helpers.serializers import ExcludedSerializer
+from helpers.serializers import FilterSerializer
 from helpers.urls import get_animal_image
 from .models import Animal, AnimalType, AnimalProperty
 
 
-class AnimalTypeSerializer(ExcludedSerializer):
+class AnimalTypeSerializer(FilterSerializer):
     class Meta:
         model = AnimalType
         fields = '__all__'
 
 
-class AnimalPropertySerializer(ExcludedSerializer):
+class AnimalPropertySerializer(FilterSerializer):
     class Meta:
         model = AnimalProperty
         fields = '__all__'
 
 
-class AnimalListRetrieveSerializer(ExcludedSerializer):
+class AnimalListRetrieveSerializer(FilterSerializer):
     """Serializer work with animals list."""
     gender = serializers.CharField(source='get_gender_display')
     animal_type = AnimalTypeSerializer()
@@ -28,11 +28,14 @@ class AnimalListRetrieveSerializer(ExcludedSerializer):
     def get_image(self, obj):
         return get_animal_image(obj)
 
+    def get_animal_type(self, obj):
+        return obj.animal_type.name
+
     class Meta:
         model = Animal
 
 
-class AnimalCreateUpdateDestroySerializer(ExcludedSerializer):
+class AnimalCreateUpdateDestroySerializer(FilterSerializer):
     """Serializer create, update and destroy animals object."""
     class Meta:
         model = Animal

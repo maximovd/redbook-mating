@@ -133,10 +133,10 @@ class Animal(BaseModel):
         max_length=1, choices=Gender.choices, verbose_name=_('Sex'), null=False
     )
     age = models.PositiveIntegerField(null=False, verbose_name=_('Age'))
-    type = models.ForeignKey(AnimalType, on_delete=models.SET_NULL)
+    type = models.ForeignKey(AnimalType, null=True, on_delete=models.SET_NULL)
     properties = models.ManyToManyField(AnimalProperty)
     description = models.TextField(verbose_name=_('Description'))
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     location = LocationField(zoom=7, default=Point(1.0, 1.0))
 
     class Meta:

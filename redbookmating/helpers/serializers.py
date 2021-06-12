@@ -1,8 +1,7 @@
-from django.contrib.gis.geos import Point
 from rest_framework import serializers
 
 
-class ExcludedSerializer(serializers.ModelSerializer):
+class FilterSerializer(serializers.ModelSerializer):
     """Excluded for created_at, created_by, updated_at, updated_by,"""
     def __new__(cls, *args, **kwargs):
         meta = getattr(cls, 'Meta', None)

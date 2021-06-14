@@ -15,8 +15,10 @@ markdown = "*"
 django-filter = "*"
 drf-yasg = "*"
 django-crum = "*"
+pillow = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.9"

@@ -21,20 +21,24 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from accounts import views
+from accounts import views as account_views
+from animals import views as animal_views
 
-
+# API
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register(r'users', account_views.UserViewSet)
+router.register(r'groups', account_views.GroupViewSet)
+router.register(r'animals', animal_views.AnimalViewSet)
+router.register(r'animals-type', animal_views.AnimalTypeViewSet)
+router.register(r'animals-properties', animal_views.AnimalPropertyViewSet)
 
 schema_view = get_schema_view(
     openapi.Info(
-        title='Redbookmating API',
+        title='Redbook mating API',
         default_version='v1',
-        description='Redbookmating backend service.',
+        description='Redbook mating backend service.',
         terms_of_service='',
-        contact=openapi.Contact(email='admin@mail.com'),
+        contact=openapi.Contact(email='d.maksimov@zebrains.team'),
         license=openapi.License(name='BSD License')
     ),
     public=True,

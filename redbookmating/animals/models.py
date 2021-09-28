@@ -9,8 +9,8 @@ from django.utils.translation import gettext_lazy as _
 from crum import get_current_user
 from location_field.models.spatial import LocationField
 
-from .enums import Gender
-from .managers import AllManager, BaseManager, OrderedManager
+from animals.enums import Gender
+from animals.managers import AllManager, BaseManager, OrderedManager
 
 logger = logging.getLogger(__name__)
 
@@ -144,4 +144,4 @@ class Animal(BaseModel):
         verbose_name_plural = _('animals')
 
     def __str__(self):
-        return f'Animal {self.lat_title} (id={self.pk}) owner {self.owner}'
+        return f'Animal {self.lat_title} (id={self.pk}) owner {self.owner})'

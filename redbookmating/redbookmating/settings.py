@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import datetime
 import os
 from pathlib import Path
 from urllib.parse import urlparse
@@ -65,7 +65,6 @@ MIDDLEWARE = [
 
     'crum.CurrentRequestUserMiddleware',
 ]
-
 
 ROOT_URLCONF = 'redbookmating.urls'
 
@@ -140,7 +139,6 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.getenv('STATIC_ROOT', os.path.join(BASE_DIR, 'static'))
 STATIC_URL = '/static/'
 
-
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
@@ -164,3 +162,11 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=5),
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+}
+
+DEFAULT_SEARCH_DISTANCE = 10  # km

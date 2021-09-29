@@ -4,21 +4,22 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+Django = "*"
 django-phone-field = "*"
 psycopg2-binary = "*"
 django-allauth = "*"
 django-location-field = "*"
 djangorestframework-simplejwt = "*"
 djangorestframework = "*"
-markdown = "*"
+Markdown = "*"
 django-filter = "*"
 drf-yasg = "*"
 django-crum = "*"
-pillow = "*"
+Pillow = "*"
 
 [dev-packages]
 pytest = "*"
+pytest-django = "*"
 
 [requires]
 python_version = "3.9"

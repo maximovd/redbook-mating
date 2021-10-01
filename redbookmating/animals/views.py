@@ -4,7 +4,7 @@ from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-import settings
+from redbookmating import settings
 from animals.models import AnimalType, AnimalProperty, Animal
 from animals.serializers import AnimalTypeSerializer, AnimalPropertySerializer, AnimalSerializer
 

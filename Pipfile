@@ -1,0 +1,25 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+Django = "*"
+django-phone-field = "*"
+psycopg2-binary = "*"
+django-allauth = "*"
+django-location-field = "*"
+djangorestframework-simplejwt = "*"
+djangorestframework = "*"
+Markdown = "*"
+django-filter = "*"
+drf-yasg = "*"
+django-crum = "*"
+Pillow = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-django = "*"
+
+[requires]
+python_version = "3.9"

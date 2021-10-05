@@ -20,6 +20,9 @@ Pillow = "*"
 [dev-packages]
 pytest = "*"
 pytest-django = "*"
+pytest-cov = "*"
+pytest-xdist = "*"
+requests-mock = "*"
 
 [requires]
 python_version = "3.9"
